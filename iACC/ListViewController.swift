@@ -130,17 +130,13 @@ class ListViewController: UITableViewController {
                             self?.tableView.reloadData()
                             
                         case let .failure(error):
-                            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .default))
-                            self?.showDetailViewController(alert, sender: self)
+                            self?.show(error: error)
                         }
                         self?.refreshControl?.endRefreshing()
                     }
                 }
             } else {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default))
-                self.showDetailViewController(alert, sender: self)
+                show(error: error)
                 self.refreshControl?.endRefreshing()
             }
         }
@@ -211,6 +207,12 @@ class ListViewController: UITableViewController {
     @objc func requestMoney() {
         let vc = RequestMoneyViewController()
         show(vc, sender: self)
+    }
+    
+    func show(error: Error) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.showDetailViewController(alert, sender: self)
     }
 }
 
