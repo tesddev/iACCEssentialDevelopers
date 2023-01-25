@@ -228,3 +228,9 @@ extension UITableViewCell {
 		}
 	}
 }
+
+
+struct ItemViewModel {
+    let title: String
+    let subtitle: String
+}
