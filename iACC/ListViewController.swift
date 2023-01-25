@@ -70,19 +70,39 @@ class ListViewController: UITableViewController {
         if fromFriendsScreen {
             FriendsAPI.shared.loadFriends { [weak self] result in
                 DispatchQueue.mainAsyncIfNeeded {
-                    self?.handleAPIResult(result)
+                    self?.handleAPIResult(result.map{ friends in
+                        friends.map{ friend in
+                            ItemViewModel(friend: friend, selection: {
+                                self?.select(friend: friend)
+                            })
+                        }
+                    })
                 }
             }
         } else if fromCardsScreen {
             CardAPI.shared.loadCards { [weak self] result in
                 DispatchQueue.mainAsyncIfNeeded {
-                    self?.handleAPIResult(result)
+                    self?.handleAPIResult(result.map{ cards in
+                        cards.map{ card in
+                            ItemViewModel(card: card, selection: {
+                                self?.select(card: card)
+                            })
+                        }
+                    })
                 }
             }
         } else if fromSentTransfersScreen || fromReceivedTransfersScreen {
-            TransfersAPI.shared.loadTransfers { [weak self] result in
+            TransfersAPI.shared.loadTransfers { [weak self, longDateStyle] result in
                 DispatchQueue.mainAsyncIfNeeded {
-                    self?.handleAPIResult(result)
+                    self?.handleAPIResult(result.map{ transfers in
+                        transfers.map{ transfer in
+                            ItemViewModel(transfer: transfer,
+                                          longDateStyle: longDateStyle,
+                                          selection: {
+                                            self?.select(transfer: transfer)
+                                          })
+                        }
+                    })
                 }
             }
         } else {
@@ -90,7 +110,7 @@ class ListViewController: UITableViewController {
         }
     }
     
-    private func handleAPIResult<T>(_ result: Result<[T], Error>) {
+    private func handleAPIResult(_ result: Result<[ItemViewModel], Error>) {
         switch result {
         case let .success(items):
             if fromFriendsScreen && User.shared?.isPremium == true {
