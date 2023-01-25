@@ -234,6 +234,18 @@ struct ItemViewModel {
     let title: String
     let subtitle: String
     
+    init(_ item: Any, longDateStyle: Bool) {
+        if let friend = item as? Friend {
+            self.init(friend: friend)
+        } else if let card = item as? Card {
+            self.init(card: card)
+        } else if let transfer = item as? Transfer {
+            self.init(transfer: transfer, longDateStyle: longDateStyle)
+        } else {
+            fatalError("unknown item: \(item)")
+        }
+    }
+    
     init(transfer: Transfer, longDateStyle: Bool) {
         let numberFormatter = Formatters.number
         numberFormatter.numberStyle = .currency
