@@ -71,7 +71,10 @@ class ListViewController: UITableViewController {
             FriendsAPI.shared.loadFriends { [weak self] result in
                 DispatchQueue.mainAsyncIfNeeded {
                     self?.handleAPIResult(result.map{ friends in
-                        friends.map{ friend in
+                        if User.shared?.isPremium == true {
+                            (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache.save(friends)
+                        }
+                        return friends.map{ friend in
                             ItemViewModel(friend: friend, selection: {
                                 self?.select(friend: friend)
                             })
@@ -95,7 +98,11 @@ class ListViewController: UITableViewController {
             TransfersAPI.shared.loadTransfers { [weak self, longDateStyle] result in
                 DispatchQueue.mainAsyncIfNeeded {
                     self?.handleAPIResult(result.map{ transfers in
-                        transfers.map{ transfer in
+                        transfers
+                            .filter{
+                                self?.fromSentTransfersScreen ?? false ? $0.isSender : !$0.isSender
+                            }
+                            .map{ transfer in
                             ItemViewModel(transfer: transfer,
                                           longDateStyle: longDateStyle,
                                           selection: {
@@ -113,33 +120,9 @@ class ListViewController: UITableViewController {
     private func handleAPIResult(_ result: Result<[ItemViewModel], Error>) {
         switch result {
         case let .success(items):
-            if fromFriendsScreen && User.shared?.isPremium == true {
-                (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache.save(items as! [Friend])
-            }
             self.retryCount = 0
             
-            var filteredItems = items as [Any]
-            if let transfers = items as? [Transfer] {
-                if fromSentTransfersScreen {
-                    filteredItems = transfers.filter(\.isSender)
-                } else {
-                    filteredItems = transfers.filter { !$0.isSender }
-                }
-            }
-            
-            self.items = filteredItems.map{ item in
-                ItemViewModel(item, longDateStyle: longDateStyle, selection: { [weak self] in
-                    if let friend = item as? Friend {
-                        self?.select(friend: friend)
-                    } else if let card = item as? Card {
-                        self?.select(card: card)
-                    } else if let transfer = item as? Transfer {
-                        self?.select(transfer: transfer)
-                    } else {
-                        fatalError("unknown item: \(item)")
-                    }
-                })
-            }
+            self.items = items
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
             
