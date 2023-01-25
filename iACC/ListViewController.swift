@@ -194,19 +194,23 @@ class ListViewController: UITableViewController {
     }
     
     @objc func addCard() {
-        navigationController?.pushViewController(AddCardViewController(), animated: true)
+        let vc = AddCardViewController()
+        show(vc, sender: self)
     }
     
     @objc func addFriend() {
-        navigationController?.pushViewController(AddFriendViewController(), animated: true)
+        let vc = AddFriendViewController()
+        show(vc, sender: self)
     }
     
     @objc func sendMoney() {
-        navigationController?.pushViewController(SendMoneyViewController(), animated: true)
+        let vc = SendMoneyViewController()
+        show(vc, sender: self)
     }
     
     @objc func requestMoney() {
-        navigationController?.pushViewController(RequestMoneyViewController(), animated: true)
+        let vc = RequestMoneyViewController()
+        show(vc, sender: self)
     }
 }
 
