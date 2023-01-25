@@ -43,6 +43,9 @@
 		08927BD4268618AC009195BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08927BCA268618AC009195BD /* User.swift */; };
 		08927BD5268618AC009195BD /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08927BCB268618AC009195BD /* FriendsAPI.swift */; };
 		08927BD6268618AC009195BD /* NotImplementedViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08927BCC268618AC009195BD /* NotImplementedViewControllers.swift */; };
+		825F2E1929817D24007689E8 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E1829817D24007689E8 /* ItemViewModel.swift */; };
+		825F2E1B29817D48007689E8 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E1A29817D48007689E8 /* UIViewController + Extension.swift */; };
+		825F2E1D29817D90007689E8 /* UITableViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E1C29817D90007689E8 /* UITableViewCell + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,9 @@
 		08927BCA268618AC009195BD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		08927BCB268618AC009195BD /* FriendsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
 		08927BCC268618AC009195BD /* NotImplementedViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotImplementedViewControllers.swift; sourceTree = "<group>"; };
+		825F2E1829817D24007689E8 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
+		825F2E1A29817D48007689E8 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		825F2E1C29817D90007689E8 /* UITableViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +238,9 @@
 				08927BC6268618AC009195BD /* CardAPI.swift */,
 				080833E1268F69C200A8099A /* ArticlesAPI.swift */,
 				08927BC22686185C009195BD /* Supporting Files */,
+				825F2E1829817D24007689E8 /* ItemViewModel.swift */,
+				825F2E1A29817D48007689E8 /* UIViewController + Extension.swift */,
+				825F2E1C29817D90007689E8 /* UITableViewCell + Extension.swift */,
 			);
 			path = iACC;
 			sourceTree = "<group>";
@@ -359,8 +368,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				08927B932686183A009195BD /* AppDelegate.swift in Sources */,
+				825F2E1B29817D48007689E8 /* UIViewController + Extension.swift in Sources */,
 				08927BCF268618AC009195BD /* ListViewController.swift in Sources */,
 				08040FFC268B4C1D0062A93B /* MainTabBarController.swift in Sources */,
+				825F2E1929817D24007689E8 /* ItemViewModel.swift in Sources */,
 				08927BD0268618AC009195BD /* CardAPI.swift in Sources */,
 				08927BD6268618AC009195BD /* NotImplementedViewControllers.swift in Sources */,
 				08927BD5268618AC009195BD /* FriendsAPI.swift in Sources */,
@@ -371,6 +382,7 @@
 				08927B952686183A009195BD /* SceneDelegate.swift in Sources */,
 				08927BD2268618AC009195BD /* TransfersAPI.swift in Sources */,
 				08927BD4268618AC009195BD /* User.swift in Sources */,
+				825F2E1D29817D90007689E8 /* UITableViewCell + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
