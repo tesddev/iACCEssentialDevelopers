@@ -167,11 +167,8 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.row] 
+        let item = items[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "ItemCell")
-        let vm = ItemViewModel(item, longDateStyle: longDateStyle, selection: {
-            
-        })
         cell.configure(item)
         return cell
     }
