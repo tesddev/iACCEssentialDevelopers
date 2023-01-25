@@ -198,8 +198,7 @@ class ListViewController: UITableViewController {
 }
 
 extension UITableViewCell {
-    func configure(_ item: Any, longDateStyle: Bool) {
-        let vm = ItemViewModel(item, longDateStyle: longDateStyle)
+    func configure(_ vm: ItemViewModel, longDateStyle: Bool) {
             textLabel?.text = vm.title
             detailTextLabel?.text = vm.subtitle
     }
