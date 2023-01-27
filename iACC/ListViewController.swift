@@ -4,21 +4,39 @@
 
 import UIKit
 
-protocol FriendsServices {
-    func loadFriends(completion: @escaping (Result<[Friend], Error>) -> Void)
+protocol ItemsServices {
+    func loadItems(completion: @escaping (Result<[ItemViewModel], Error>) -> Void)
 }
-protocol CardsServices {
-    func loadCards(completion: @escaping (Result<[Card], Error>) -> Void)
-}
-protocol TransferServices {
-    func loadTransfers(completion: @escaping (Result<[Transfer], Error>) -> Void)
+
+struct FriendsAPIItemsServicesAdapter: ItemsServices {
+    let api: FriendsAPI
+    let cache: FriendsCache
+    let isPremium: Bool
+    let select: (Friend) -> ()
+    
+    func loadItems(completion: @escaping (Result<[ItemViewModel], Error>) -> Void) {
+        api.loadFriends { result in
+            DispatchQueue.mainAsyncIfNeeded {
+                completion(result.map{ friends in
+                    if isPremium {
+                        cache.save(friends)
+                    }
+                    return friends.map{ friend in
+                        ItemViewModel(friend: friend, selection: {
+                            select(friend)
+                        })
+                    }
+                })
+            }
+        }
+    }
+    
+    
 }
 
 class ListViewController: UITableViewController {
     var items = [ItemViewModel]()
-    var friendServices: FriendsServices?
-    var cardsServices: CardsServices?
-    var transferServices: TransferServices?
+    var service: ItemsServices?
     
     var retryCount = 0
     var maxRetryCount = 0
@@ -81,22 +99,15 @@ class ListViewController: UITableViewController {
     @objc private func refresh() {
         refreshControl?.beginRefreshing()
         if fromFriendsScreen {
-            friendServices?.loadFriends { [weak self] result in
-                DispatchQueue.mainAsyncIfNeeded {
-                    self?.handleAPIResult(result.map{ friends in
-                        if User.shared?.isPremium == true {
-                            (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache.save(friends)
-                        }
-                        return friends.map{ friend in
-                            ItemViewModel(friend: friend, selection: {
-                                self?.select(friend: friend)
-                            })
-                        }
-                    })
-                }
-            }
+            service = FriendsAPIItemsServicesAdapter(api: FriendsAPI.shared,
+                                                     cache: (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache,
+                                                     isPremium: User.shared?.isPremium == true,
+                                                     select: { [weak self] friend in
+                                                        self?.select(friend: friend)
+                                                     })
+            service?.loadItems(completion: handleAPIResult)
         } else if fromCardsScreen {
-            cardsServices?.loadCards { [weak self] result in
+            CardAPI.shared.loadCards { [weak self] result in
                 DispatchQueue.mainAsyncIfNeeded {
                     self?.handleAPIResult(result.map{ cards in
                         cards.map{ card in
@@ -108,7 +119,7 @@ class ListViewController: UITableViewController {
                 }
             }
         } else if fromSentTransfersScreen || fromReceivedTransfersScreen {
-            transferServices?.loadTransfers { [weak self, longDateStyle] result in
+            TransfersAPI.shared.loadTransfers { [weak self, longDateStyle] result in
                 DispatchQueue.mainAsyncIfNeeded {
                     self?.handleAPIResult(result.map{ transfers in
                         transfers
