@@ -4,8 +4,21 @@
 
 import UIKit
 
+protocol FriendsServices {
+    func loadFriends(completion: @escaping (Result<[Friend], Error>) -> Void)
+}
+protocol CardsServices {
+    func loadCards(completion: @escaping (Result<[Card], Error>) -> Void)
+}
+protocol TransferServices {
+    func loadTransfers(completion: @escaping (Result<[Transfer], Error>) -> Void)
+}
+
 class ListViewController: UITableViewController {
     var items = [ItemViewModel]()
+    var friendServices: FriendsServices?
+    var cardsServices: CardsServices?
+    var transferServices: TransferServices?
     
     var retryCount = 0
     var maxRetryCount = 0
@@ -68,7 +81,7 @@ class ListViewController: UITableViewController {
     @objc private func refresh() {
         refreshControl?.beginRefreshing()
         if fromFriendsScreen {
-            FriendsAPI.shared.loadFriends { [weak self] result in
+            friendServices?.loadFriends { [weak self] result in
                 DispatchQueue.mainAsyncIfNeeded {
                     self?.handleAPIResult(result.map{ friends in
                         if User.shared?.isPremium == true {
@@ -83,7 +96,7 @@ class ListViewController: UITableViewController {
                 }
             }
         } else if fromCardsScreen {
-            CardAPI.shared.loadCards { [weak self] result in
+            cardsServices?.loadCards { [weak self] result in
                 DispatchQueue.mainAsyncIfNeeded {
                     self?.handleAPIResult(result.map{ cards in
                         cards.map{ card in
@@ -95,7 +108,7 @@ class ListViewController: UITableViewController {
                 }
             }
         } else if fromSentTransfersScreen || fromReceivedTransfersScreen {
-            TransfersAPI.shared.loadTransfers { [weak self, longDateStyle] result in
+            transferServices?.loadTransfers { [weak self, longDateStyle] result in
                 DispatchQueue.mainAsyncIfNeeded {
                     self?.handleAPIResult(result.map{ transfers in
                         transfers
