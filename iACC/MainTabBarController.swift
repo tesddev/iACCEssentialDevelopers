@@ -5,9 +5,12 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
+    
+    private var friendsCache: FriendsCache!
 	
-	convenience init() {
+    convenience init(friendsCache: FriendsCache) {
 		self.init(nibName: nil, bundle: nil)
+        self.friendsCache = friendsCache
 		self.setupViewController()
 	}
 
@@ -62,9 +65,7 @@ class MainTabBarController: UITabBarController {
         
         vc.service = FriendsAPIItemsServicesAdapter(
             api: FriendsAPI.shared,
-            cache: isPremium ?
-            (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache :
-            NullFriendsCache(),
+            cache: isPremium ? friendsCache : NullFriendsCache(),
             select: { [weak vc] friend in
                 vc?.select(friend: friend)
             })
