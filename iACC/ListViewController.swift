@@ -33,7 +33,7 @@ class ListViewController: UITableViewController {
     
     private func handleAPIResult(_ result: Result<[ItemViewModel], Error>) {
         switch result {
-        case let .success(items):            
+        case let .success(items):
             self.items = items
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
