@@ -25,26 +25,8 @@ class ListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
-        if fromSentTransfersScreen {
-            shouldRetry = true
-            maxRetryCount = 1
-            longDateStyle = true
-            
-            navigationItem.title = "Sent"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send", style: .done, target: self, action: #selector(sendMoney))
-            
-        } else if fromReceivedTransfersScreen {
-            shouldRetry = true
-            maxRetryCount = 1
-            longDateStyle = false
-            
-            navigationItem.title = "Received"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Request", style: .done, target: self, action: #selector(requestMoney))
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,28 +41,6 @@ class ListViewController: UITableViewController {
         refreshControl?.beginRefreshing()
         if fromFriendsScreen {
             service?.loadItems(completion: handleAPIResult)
-        } else if fromCardsScreen {
-            service?.loadItems(completion: handleAPIResult)
-        } else if fromSentTransfersScreen || fromReceivedTransfersScreen {
-            TransfersAPI.shared.loadTransfers { [weak self, longDateStyle] result in
-                DispatchQueue.mainAsyncIfNeeded {
-                    self?.handleAPIResult(result.map{ transfers in
-                        transfers
-                            .filter{
-                                self?.fromSentTransfersScreen ?? false ? $0.isSender : !$0.isSender
-                            }
-                            .map{ transfer in
-                            ItemViewModel(transfer: transfer,
-                                          longDateStyle: longDateStyle,
-                                          selection: {
-                                            self?.select(transfer: transfer)
-                                          })
-                        }
-                    })
-                }
-            }
-        } else {
-            fatalError("unknown context")
         }
     }
     

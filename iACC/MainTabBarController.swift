@@ -76,12 +76,29 @@ class MainTabBarController: UITabBarController {
 	private func makeSentTransfersList() -> ListViewController {
 		let vc = ListViewController()
 		vc.fromSentTransfersScreen = true
+        vc.shouldRetry = true
+        vc.maxRetryCount = 1
+        vc.longDateStyle = true
+        vc.navigationItem.title = "Sent"
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send", style: .done, target: vc, action: #selector(sendMoney))
+        vc.service = SentTransfersAPIItemsServicesAdapter(api: TransfersAPI.shared, select: { [weak vc] transfer in
+            vc?.select(transfer: transfer)
+        })
 		return vc
 	}
 	
 	private func makeReceivedTransfersList() -> ListViewController {
 		let vc = ListViewController()
 		vc.fromReceivedTransfersScreen = true
+        vc.shouldRetry = true
+        vc.maxRetryCount = 1
+        vc.longDateStyle = false
+        
+        vc.navigationItem.title = "Received"
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Request", style: .done, target: vc, action: #selector(requestMoney))
+        vc.service = ReceivedTransfersAPIItemsServicesAdapter(api: TransfersAPI.shared, select: { [weak vc] transfer in
+            vc?.select(transfer: transfer)
+        })
 		return vc
 	}
 	

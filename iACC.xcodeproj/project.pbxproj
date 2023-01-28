@@ -48,6 +48,8 @@
 		825F2E1D29817D90007689E8 /* UITableViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E1C29817D90007689E8 /* UITableViewCell + Extension.swift */; };
 		825F2E2729854716007689E8 /* FriendsAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2629854716007689E8 /* FriendsAPIItemsServicesAdapter.swift */; };
 		825F2E2929854745007689E8 /* CardsAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */; };
+		825F2E2B29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2A29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift */; };
+		825F2E2D2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2C2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,8 @@
 		825F2E1C29817D90007689E8 /* UITableViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Extension.swift"; sourceTree = "<group>"; };
 		825F2E2629854716007689E8 /* FriendsAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
 		825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
+		825F2E2A29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentTransfersAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
+		825F2E2C2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedTransfersAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +281,8 @@
 			children = (
 				825F2E2629854716007689E8 /* FriendsAPIItemsServicesAdapter.swift */,
 				825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */,
+				825F2E2A29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift */,
+				825F2E2C2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift */,
 			);
 			name = Adaptors;
 			sourceTree = "<group>";
@@ -386,9 +392,11 @@
 				08927BCF268618AC009195BD /* ListViewController.swift in Sources */,
 				08040FFC268B4C1D0062A93B /* MainTabBarController.swift in Sources */,
 				825F2E1929817D24007689E8 /* ItemViewModel.swift in Sources */,
+				825F2E2B29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift in Sources */,
 				08927BD0268618AC009195BD /* CardAPI.swift in Sources */,
 				08927BD6268618AC009195BD /* NotImplementedViewControllers.swift in Sources */,
 				08927BD5268618AC009195BD /* FriendsAPI.swift in Sources */,
+				825F2E2D2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift in Sources */,
 				08927BD1268618AC009195BD /* FriendsCache.swift in Sources */,
 				825F2E2729854716007689E8 /* FriendsAPIItemsServicesAdapter.swift in Sources */,
 				080833E0268F609C00A8099A /* Helpers.swift in Sources */,
