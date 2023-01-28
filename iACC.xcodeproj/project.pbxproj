@@ -46,6 +46,8 @@
 		825F2E1929817D24007689E8 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E1829817D24007689E8 /* ItemViewModel.swift */; };
 		825F2E1B29817D48007689E8 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E1A29817D48007689E8 /* UIViewController + Extension.swift */; };
 		825F2E1D29817D90007689E8 /* UITableViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E1C29817D90007689E8 /* UITableViewCell + Extension.swift */; };
+		825F2E2729854716007689E8 /* FriendsAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2629854716007689E8 /* FriendsAPIItemsServicesAdapter.swift */; };
+		825F2E2929854745007689E8 /* CardsAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,8 @@
 		825F2E1829817D24007689E8 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		825F2E1A29817D48007689E8 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		825F2E1C29817D90007689E8 /* UITableViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Extension.swift"; sourceTree = "<group>"; };
+		825F2E2629854716007689E8 /* FriendsAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
+		825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +228,7 @@
 		08927B912686183A009195BD /* iACC */ = {
 			isa = PBXGroup;
 			children = (
+				825F2E2529854703007689E8 /* Adaptors */,
 				08927B922686183A009195BD /* AppDelegate.swift */,
 				08927B942686183A009195BD /* SceneDelegate.swift */,
 				08040FFB268B4C1D0062A93B /* MainTabBarController.swift */,
@@ -265,6 +270,15 @@
 				08927BA02686183B009195BD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		825F2E2529854703007689E8 /* Adaptors */ = {
+			isa = PBXGroup;
+			children = (
+				825F2E2629854716007689E8 /* FriendsAPIItemsServicesAdapter.swift */,
+				825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */,
+			);
+			name = Adaptors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,7 +390,9 @@
 				08927BD6268618AC009195BD /* NotImplementedViewControllers.swift in Sources */,
 				08927BD5268618AC009195BD /* FriendsAPI.swift in Sources */,
 				08927BD1268618AC009195BD /* FriendsCache.swift in Sources */,
+				825F2E2729854716007689E8 /* FriendsAPIItemsServicesAdapter.swift in Sources */,
 				080833E0268F609C00A8099A /* Helpers.swift in Sources */,
+				825F2E2929854745007689E8 /* CardsAPIItemsServicesAdapter.swift in Sources */,
 				08927BCD268618AC009195BD /* SegmentNavigationViewController.swift in Sources */,
 				080833E2268F69C200A8099A /* ArticlesAPI.swift in Sources */,
 				08927B952686183A009195BD /* SceneDelegate.swift in Sources */,
