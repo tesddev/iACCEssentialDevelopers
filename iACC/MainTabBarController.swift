@@ -54,6 +54,15 @@ class MainTabBarController: UITabBarController {
 	private func makeFriendsList() -> ListViewController {
 		let vc = ListViewController()
 		vc.fromFriendsScreen = true
+        
+        vc.service = FriendsAPIItemsServicesAdapter(
+            api: FriendsAPI.shared,
+            cache: (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache,
+            isPremium: User.shared?.isPremium == true,
+            select: { [weak vc] friend in
+                vc?.select(friend: friend)
+            })
+        
 		return vc
 	}
 	
@@ -75,4 +84,29 @@ class MainTabBarController: UITabBarController {
 		return vc
 	}
 	
+}
+
+
+struct FriendsAPIItemsServicesAdapter: ItemsServices {
+    let api: FriendsAPI
+    let cache: FriendsCache
+    let isPremium: Bool
+    let select: (Friend) -> ()
+    
+    func loadItems(completion: @escaping (Result<[ItemViewModel], Error>) -> Void) {
+        api.loadFriends { result in
+            DispatchQueue.mainAsyncIfNeeded {
+                completion(result.map{ friends in
+                    if isPremium {
+                        cache.save(friends)
+                    }
+                    return friends.map{ friend in
+                        ItemViewModel(friend: friend, selection: {
+                            select(friend)
+                        })
+                    }
+                })
+            }
+        }
+    }
 }

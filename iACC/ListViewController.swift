@@ -8,32 +8,6 @@ protocol ItemsServices {
     func loadItems(completion: @escaping (Result<[ItemViewModel], Error>) -> Void)
 }
 
-struct FriendsAPIItemsServicesAdapter: ItemsServices {
-    let api: FriendsAPI
-    let cache: FriendsCache
-    let isPremium: Bool
-    let select: (Friend) -> ()
-    
-    func loadItems(completion: @escaping (Result<[ItemViewModel], Error>) -> Void) {
-        api.loadFriends { result in
-            DispatchQueue.mainAsyncIfNeeded {
-                completion(result.map{ friends in
-                    if isPremium {
-                        cache.save(friends)
-                    }
-                    return friends.map{ friend in
-                        ItemViewModel(friend: friend, selection: {
-                            select(friend)
-                        })
-                    }
-                })
-            }
-        }
-    }
-    
-    
-}
-
 class ListViewController: UITableViewController {
     var items = [ItemViewModel]()
     var service: ItemsServices?
@@ -99,12 +73,6 @@ class ListViewController: UITableViewController {
     @objc private func refresh() {
         refreshControl?.beginRefreshing()
         if fromFriendsScreen {
-            service = FriendsAPIItemsServicesAdapter(api: FriendsAPI.shared,
-                                                     cache: (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache,
-                                                     isPremium: User.shared?.isPremium == true,
-                                                     select: { [weak self] friend in
-                                                        self?.select(friend: friend)
-                                                     })
             service?.loadItems(completion: handleAPIResult)
         } else if fromCardsScreen {
             CardAPI.shared.loadCards { [weak self] result in
