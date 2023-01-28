@@ -50,6 +50,7 @@
 		825F2E2929854745007689E8 /* CardsAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */; };
 		825F2E2B29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2A29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift */; };
 		825F2E2D2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2C2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift */; };
+		825F2E2F29855A17007689E8 /* FriendsCacheServiceAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F2E2E29855A17007689E8 /* FriendsCacheServiceAdaptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
 		825F2E2A29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentTransfersAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
 		825F2E2C2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedTransfersAPIItemsServicesAdapter.swift; sourceTree = "<group>"; };
+		825F2E2E29855A17007689E8 /* FriendsCacheServiceAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCacheServiceAdaptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +285,7 @@
 				825F2E2829854745007689E8 /* CardsAPIItemsServicesAdapter.swift */,
 				825F2E2A29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift */,
 				825F2E2C2985588A007689E8 /* ReceivedTransfersAPIItemsServicesAdapter.swift */,
+				825F2E2E29855A17007689E8 /* FriendsCacheServiceAdaptor.swift */,
 			);
 			name = Adaptors;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				08927B932686183A009195BD /* AppDelegate.swift in Sources */,
 				825F2E1B29817D48007689E8 /* UIViewController + Extension.swift in Sources */,
 				08927BCF268618AC009195BD /* ListViewController.swift in Sources */,
+				825F2E2F29855A17007689E8 /* FriendsCacheServiceAdaptor.swift in Sources */,
 				08040FFC268B4C1D0062A93B /* MainTabBarController.swift in Sources */,
 				825F2E1929817D24007689E8 /* ItemViewModel.swift in Sources */,
 				825F2E2B29855410007689E8 /* SentTransfersAPIItemsServicesAdapter.swift in Sources */,
