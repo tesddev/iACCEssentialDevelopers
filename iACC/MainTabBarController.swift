@@ -58,11 +58,13 @@ class MainTabBarController: UITabBarController {
         vc.maxRetryCount = 2
         vc.title = "Friends"
         vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: vc, action: #selector(addFriend))
+        let isPremium = User.shared?.isPremium == true
         
         vc.service = FriendsAPIItemsServicesAdapter(
             api: FriendsAPI.shared,
-            cache: (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache,
-            isPremium: User.shared?.isPremium == true,
+            cache: isPremium ?
+            (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache :
+            NullFriendsCache(),
             select: { [weak vc] friend in
                 vc?.select(friend: friend)
             })
@@ -94,16 +96,13 @@ class MainTabBarController: UITabBarController {
 struct FriendsAPIItemsServicesAdapter: ItemsServices {
     let api: FriendsAPI
     let cache: FriendsCache
-    let isPremium: Bool
     let select: (Friend) -> ()
     
     func loadItems(completion: @escaping (Result<[ItemViewModel], Error>) -> Void) {
         api.loadFriends { result in
             DispatchQueue.mainAsyncIfNeeded {
                 completion(result.map{ friends in
-                    if isPremium {
-                        cache.save(friends)
-                    }
+                    cache.save(friends)
                     return friends.map{ friend in
                         ItemViewModel(friend: friend, selection: {
                             select(friend)
@@ -113,4 +112,11 @@ struct FriendsAPIItemsServicesAdapter: ItemsServices {
             }
         }
     }
+}
+
+
+// Null Object Pattern
+class NullFriendsCache: FriendsCache {
+    override func save(_ newFriends: [Friend]) {}
+    
 }
